@@ -1,0 +1,64 @@
+use std::io;
+
+fn main() {
+    println!("Привет, я калькулятор. Я умею складывать, вычитать, умножать и делить.");
+    println!("Для моей корректной работы введите 2 целочисленных числа и символ операции.");
+    println!("Например: 15 22 +");
+    
+    let mut input_first_number = String::new();
+    io::stdin().read_line(&mut input_first_number).expect("Failed to read line");
+    let input_first_number = input_first_number.trim();
+
+    let mut input_second_number = String::new();
+    io::stdin().read_line(&mut input_second_number).expect("Failed to read line");
+    let input_second_number = input_second_number.trim();
+
+    let mut input_simbol = String::new();
+    io::stdin().read_line(&mut input_simbol).expect("Failed to read line");
+    let input_simbol = input_simbol.trim();
+
+    let first_number: i32 = match input_first_number.parse() {
+        Ok(num) => num,
+        Err(_) => {
+        println!("Неверный формат первого числа!");
+            return;
+        }
+    };
+
+    let second_number: i32 = match input_second_number.parse() {
+        Ok(num) => num,
+        Err(_) => {
+        println!("Неверный формат второго числа!");
+            return;
+        }
+    };
+
+    match input_simbol {
+        "+" => plus(first_number, second_number),
+        "-" => minus(first_number, second_number),
+        "*" => multiply(first_number, second_number),
+        "/" => divide(first_number, second_number),
+        _ => println!("Неверная операция!"),
+
+    }
+}
+
+fn plus(a:i32, b:i32) {
+    println!("{}",a + b);
+}
+
+fn minus(a:i32, b:i32) {
+    println!("{}",a - b);
+}
+
+fn multiply(a:i32, b:i32) {
+    println!("{}",a * b);
+}
+
+fn divide(a:i32, b:i32) {
+    if b == 0 {
+        println!("На ноль делить нельзя!");
+    } else {    
+        println!("{}",a / b);
+    }
+}
